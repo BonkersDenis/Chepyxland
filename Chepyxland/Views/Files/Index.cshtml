@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Chepyxland.Models.FileEntity>
+
+@{
+    ViewData["Title"] = "File List";
+}
+
+<h2>Uploaded Files</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Имя файла</th>
+            <th>Загружено</th>
+            <th>Дата загрузки</th>
+            <th> Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var file in Model)
+        {
+            <tr>
+                <td>@file.FileName</td>
+                <td>@file.UploadedBy</td>
+                <td>@file.UploadDate</td>
+                <td>
+                    <a asp-action="Download" asp-route-id="@file.Id" class="btn btn-success">Download</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Кнопка для загрузки нового файла -->
+<form action="/Files/Upload" method="get">
+    <button type="submit" class="btn btn-primary">Upload New File</button>
+</form>

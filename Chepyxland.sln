@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35208.52
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chepyxland", "Chepyxland\Chepyxland.csproj", "{A1C3E85E-B1FC-44A0-97C5-E5ECA68A0EE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1C3E85E-B1FC-44A0-97C5-E5ECA68A0EE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1C3E85E-B1FC-44A0-97C5-E5ECA68A0EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C3E85E-B1FC-44A0-97C5-E5ECA68A0EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1C3E85E-B1FC-44A0-97C5-E5ECA68A0EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {71FC2B30-A1B3-4A86-AB71-8DD25D07B7C4}
+	EndGlobalSection
+EndGlobal
