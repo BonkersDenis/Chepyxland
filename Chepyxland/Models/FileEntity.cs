@@ -2,7 +2,11 @@
 {
     public class FileEntity
     {
-        public int Id { get; set; } // Уникальный идентификатор файла
+        /// <summary>
+        /// Уникальный идентификатор файла
+        /// </summary>
+        public int Id { get; set; }
+        //TODO: Переделать комментарии под summary
         public string FileName { get; set; } // Имя файла
         public string FilePath { get; set; } // Путь к файлу
         public string ContentType { get; set; } // Тип файла (например, "application/pdf")

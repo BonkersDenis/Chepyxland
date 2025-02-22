@@ -34,7 +34,7 @@ namespace Chepyxland.Controllers
 
         // POST: Files/Upload
         [HttpPost]
-        [ValidateAntiForgeryToken] // Защита от CSRF-атак
+        //TODO: Настроить токен на стороне клиента. [ValidateAntiForgeryToken] // Защита от CSRF-атак
         public async Task<IActionResult> Upload(IFormFile file)
         {
             if (file == null || file.Length == 0)
@@ -44,7 +44,7 @@ namespace Chepyxland.Controllers
             }
 
             // Определяем путь для сохранения файла
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads");
 
             // Проверяем, существует ли папка uploads, и создаем её, если её нет
             if (!Directory.Exists(uploadsFolder))
