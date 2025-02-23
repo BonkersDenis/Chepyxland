@@ -1,0 +1,17 @@
+﻿@model Chepyxland.Models.SignInModel
+
+@{
+}
+
+<form asp-action="SignIn" method="post">
+    <div>
+        <label>Login</label>
+        <input type="text" name="Login" asp-for="@Model.Login" required />
+    </div>
+    
+    <div>
+        <label>Password</label>
+        <input type="text" name="Password" asp-for="@Model.Password" required />
+    </div>
+    <button type="submit">GOGOGO</button>
+</form>

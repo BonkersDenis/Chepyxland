@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore; // Для работы с DbContext
-using Chepyxland.Data; // Пространство имен, где находится ApplicationDbContext
+using Microsoft.EntityFrameworkCore; // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ DbContext
+using Chepyxland.Data;
+using Chepyxland.Services; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ApplicationDbContext
 
 namespace Chepyxland
 {
@@ -9,38 +10,42 @@ namespace Chepyxland
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // 1. Регистрация служб в контейнере зависимостей
-            // Добавляем поддержку MVC
+            // 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ MVC
             builder.Services.AddControllersWithViews();
 
-            // Регистрируем контекст базы данных
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // 2. Создаем приложение
+            // Р”РѕР±Р°РІР»РµРЅРёРµ СЃРµСЂРІРёСЃРѕРІ
+            builder.Services.AddScoped<AuthorizeService>();
+            builder.Services.AddScoped<JwtTokenService>();
+            
+            // 2. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             var app = builder.Build();
 
-            // 3. Настройка HTTP-конвейера
+            // 3. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ HTTP-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             if (!app.Environment.IsDevelopment())
             {
-                // Обработка ошибок в продакшен-среде
-                app.UseExceptionHandler("/Home/Error"); // Перенаправление на страницу ошибки
-                app.UseHsts(); // Включение HSTS для HTTPS
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ
+                app.UseExceptionHandler("/Home/Error"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+                app.UseHsts(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ HSTS пїЅпїЅпїЅ HTTPS
             }
 
-            app.UseHttpsRedirection(); // Перенаправление на HTTPS
-            app.UseStaticFiles(); // Поддержка статических файлов (css, js, uploads)
+            app.UseHttpsRedirection(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ HTTPS
+            app.UseStaticFiles(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (css, js, uploads)
 
-            app.UseRouting(); // Настройка маршрутизации
+            app.UseRouting(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-            app.UseAuthorization(); // Авторизация
+            app.UseAuthorization(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-            // 4. Настройка маршрутов для MVC
+            // 4. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ MVC
             app.MapControllerRoute(
-                name: "default", // Имя маршрута
-                pattern: "{controller=Files}/{action=Index}/{id?}"); // Шаблон маршрута
+                name: "default", // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                pattern: "{controller=[controller]}/{action=[action]}"); // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-            // 5. Запуск приложения
+            // 5. пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             app.Run();
         }
     }
